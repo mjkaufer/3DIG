@@ -13,6 +13,8 @@
       var spazz = false;
 
       window.onload = function(){
+        if(isMobile())
+          alert('This will probably not work on your mobile phone. Please try this on a desktop.');
       init();
       animate();
       $('#it').val(plotRandom());
@@ -192,3 +194,6 @@
         // controls.update();
       }
 
+      function isMobile(){
+       return  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i);
+      }
