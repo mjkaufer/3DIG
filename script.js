@@ -6,11 +6,14 @@
       var windowHalfX = window.innerWidth / 2;
       var windowHalfY = window.innerHeight / 2;
       var start = Date.now();
+      var autoControl = true;
 
       var cmat;
 
       var intervalID;
       var spazz = false;
+      var mouseX = -1, mouseY = -1;
+
 
       window.onload = function(){
         if(isMobile())
@@ -27,6 +30,13 @@
       intervalID = setInterval(function(){plotRandom()}, 100);
     spazz = !spazz;
   }
+
+  function toggleControls(){
+    if(!autoControl)
+      group.rotation.y = group.rotation.x = group.rotation.z = 0;
+
+    autoControl = !autoControl;
+  }  
 
   function addCube(x, y, z, col){
     var size = 100;
@@ -184,16 +194,36 @@
       }
 
       function render() {
-
+        if(autoControl){
         group.rotation.y+=0.01;
-        group.rotation.z = Math.sin(group.rotation.y) * Math.PI / 4;
+        group.rotation.z = Math.sin(group.rotation.y) * Math.PI / 4;         
+        }
+        
         camera.lookAt( scene.position );
 
         renderer.render( scene, camera );
 
         // controls.update();
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
       }
 
       function isMobile(){
        return  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i);
       }
+
+      function onDocumentMouseMove( event ) {
+        if(autoControl)
+          return; 
+        var omx = mouseX;
+        var omy = mouseY;
+        timeFrom = 0;
+        mouseX = event.clientX - windowHalfX;
+        mouseY = event.clientY - windowHalfY;
+        if(omx == -1)
+          return;
+        group.rotation.y += (omx - mouseX) * 0.005;
+        group.rotation.z += (omy - mouseY) * 0.01;
+
+      }      
+
