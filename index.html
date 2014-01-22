@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://pwstegman.kd.io/character%20recognition/ -->
+<html lang="en">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Icon Generator</title>
+    <style type="text/css">
+      canvas { border: 1px solid #000; float:left; margin-left:50px;}
+      @import url(http://fonts.googleapis.com/css?family=Lato);
+      body {
+        background-color: #000000;
+        margin: 0px;
+        overflow: hidden;
+        color:white;
+        font-family: 'Lato', sans-serif;
+
+      }
+
+      </style>
+
+    <script type="text/javascript" src="jquery.js"></script>
+
+    <script type="text/javascript" src="sha512.js"></script>
+
+    <script type="text/javascript" src="three.min.js"></script>
+    <!--<script src="TrackballControls.js"></script>-->
+
+    <script type="text/javascript" src="script.js"></script>
+    
+  </head>
+  
+  <body unselectable="on">
+
+  <div style="position:absolute;margin-left:25px;">
+
+  <p>Made with ThreeJS</p>
+  <p>Matthew Kaufer</p>
+  <p>Text to make icon out of:  <input type="text" name="a" id="it"/></p>
+  <input type="button" onclick="plot($('#it').val())" value="Set new pattern."/>
+
+  <input type="button" onclick="plotRandom()" value="Generate a random pattern."/>
+  <br>
+  <input type="button" onclick="toggleSpazz()" value="Spazz mode!"/>
+
+  </div>
+    
+  
+  </body>
+</html>
