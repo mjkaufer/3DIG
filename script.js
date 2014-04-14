@@ -18,9 +18,10 @@
       window.onload = function(){
         if(isMobile())
           alert('This will probably not work on your mobile phone. Please try this on a desktop.');
-      init();
-      animate();
-      $('#it').val(plotRandom());
+	      init();
+	      animate();
+	      $('#it').val(plotRandom());
+		  $('#it').on('input',function(){plot();console.log('a')});
       }
 
   function toggleSpazz(){
@@ -50,23 +51,24 @@
 
   function addY(x, z, arr, startindex){
     for(var y = -2; y <= 2; y++ )
-      if(arr[startindex + y + 2] == true)
-      addCube(x, y, z);
+      if(arr[startindex + y + 2] % 2 == 0)
+      	addCube(x, y, z);
   }
 
-  function toBoolArray(hash){
+  function toArr(hash){
     var retArr = new Array();
     for(var x = 0; x < hash.length; x+=2){
-      retArr.push(parseInt("0x" + hash.substring(x, x+2), 16) % 2 == 0);
+      retArr.push(parseInt(hash.substring(x, x+2), 16) % 2);
     }
     return retArr;
   }
 
 
-  function plot(str){
+  function plot(){
+  	var str = $('#it').val();
     cmat = getMat(hash(str));
     group.children = [];
-    var arr = toBoolArray(hash(str));
+    var arr = toArr(hash(str));
     var count = 1;
 
     var startDict = {};
@@ -137,8 +139,8 @@
 
   function plotRandom(){
     var x = Math.random()
-    plot(x + "");
     $('#it').val(x)
+    plot();
     return x;
   }
       function init() {
@@ -226,4 +228,3 @@
         group.rotation.z += (omy - mouseY) * 0.01;
 
       }      
-
